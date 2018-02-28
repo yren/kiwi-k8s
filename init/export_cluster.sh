@@ -59,5 +59,19 @@ kops create cluster ${CLUSTER_NAME} \
 --dry-run \
 -o yaml > out/$CLUSTER_NAME.yaml
 
+echo "edit out/$CLUSTER_NAME.yaml, follow part"
+
+cat <<EOF
+kubernetesApiAccess:
+- {YOUR_IP}/32
+
+sshKeyName: ${SSH_KEY}
+
+docker:
+    version: 17.12.0
+    
+subnets:
+
+EOF
 
 echo "cp out/$CLUSTER_NAME.yaml resources/$CLUSTER_NAME.yaml"

@@ -1,0 +1,165 @@
+apiVersion: kops/v1alpha2
+kind: Cluster
+metadata:
+  creationTimestamp: null
+  name: dev.kiwi.k8s.local
+spec:
+  api:
+    loadBalancer:
+      type: Public
+  authorization:
+    alwaysAllow: {}
+  channel: stable
+  cloudProvider: aws
+  configBase: s3://dev-kiwi-k8s-store/dev.kiwi.k8s.local
+  etcdClusters:
+  - etcdMembers:
+    - instanceGroup: master-us-east-1a
+      name: a
+    - instanceGroup: master-us-east-1b
+      name: b
+    - instanceGroup: master-us-east-1c
+      name: c
+    name: main
+  - etcdMembers:
+    - instanceGroup: master-us-east-1a
+      name: a
+    - instanceGroup: master-us-east-1b
+      name: b
+    - instanceGroup: master-us-east-1c
+      name: c
+    name: events
+  iam:
+    allowContainerRegistry: true
+    legacy: false
+  kubernetesApiAccess:
+  - 0.0.0.0/0
+  sshKeyName: ${replace}
+  docker:
+    version: 17.12.0
+  kubernetesVersion: 1.8.6
+  masterPublicName: api.dev.kiwi.k8s.local
+  networkCIDR: 10.35.0.0/16
+  networkID: vpc-f4845c8f
+  networking:
+    flannel:
+      backend: vxlan
+  nonMasqueradeCIDR: 100.64.0.0/10
+  sshAccess:
+  - 0.0.0.0/0
+subnets:
+  - cidr: 10.35.20.0/24
+    name: us-east-1a
+    type: Private
+    zone: us-east-1a
+  - cidr: 10.35.21.0/24
+    name: us-east-1b
+    type: Private
+    zone: us-east-1b
+  - cidr: 10.35.22.0/24
+    name: us-east-1c
+    type: Private
+    zone: us-east-1c
+  - cidr: 10.35.30.0/24
+    name: utility-us-east-1a
+    type: Utility
+    zone: us-east-1a
+  - cidr: 10.35.31.0/24
+    name: utility-us-east-1b
+    type: Utility
+    zone: us-east-1b
+  - cidr: 10.35.32.0/24
+    name: utility-us-east-1c
+    type: Utility
+    zone: us-east-1c
+  topology:
+    dns:
+      type: Public
+    masters: private
+    nodes: private
+
+---
+
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: null
+  labels:
+    kops.k8s.io/cluster: dev.kiwi.k8s.local
+  name: master-us-east-1a
+spec:
+  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2018-01-14
+  machineType: t2.medium
+  maxSize: 1
+  minSize: 1
+  nodeLabels:
+    kops.k8s.io/instancegroup: master-us-east-1a
+  role: Master
+  rootVolumeSize: 30
+  subnets:
+  - us-east-1a
+
+---
+
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: null
+  labels:
+ kops.k8s.io/cluster: dev.kiwi.k8s.local
+  name: master-us-east-1b
+spec:
+  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2018-01-14
+  machineType: t2.medium
+  maxSize: 1
+  minSize: 1
+  nodeLabels:
+    kops.k8s.io/instancegroup: master-us-east-1b
+  role: Master
+  rootVolumeSize: 30
+  subnets:
+  - us-east-1b
+
+---
+
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: null
+  labels:
+    kops.k8s.io/cluster: dev.kiwi.k8s.local
+  name: master-us-east-1c
+spec:
+  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2018-01-14
+  machineType: t2.medium
+  maxSize: 1
+  minSize: 1
+  nodeLabels:
+    kops.k8s.io/instancegroup: master-us-east-1c
+  role: Master
+  rootVolumeSize: 30
+  subnets:
+  - us-east-1c
+
+---
+
+apiVersion: kops/v1alpha2
+kind: InstanceGroup
+metadata:
+  creationTimestamp: null
+  labels:
+    kops.k8s.io/cluster: dev.kiwi.k8s.local
+  name: nodes
+spec:
+  image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2018-01-14
+  machineType: t2.medium
+  maxSize: 3
+  minSize: 3
+  nodeLabels:
+    kops.k8s.io/instancegroup: nodes
+  role: Node
+  rootVolumeSize: 30
+  subnets:
+  - us-east-1a
+  - us-east-1b
+  - us-east-1c
