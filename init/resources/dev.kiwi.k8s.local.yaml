@@ -34,7 +34,7 @@ spec:
     legacy: false
   kubernetesApiAccess:
   - 0.0.0.0/0
-  sshKeyName: ${replace}
+  sshKeyName: renyufei2018
   docker:
     version: 17.12.0
   kubernetesVersion: 1.8.6
@@ -47,7 +47,7 @@ spec:
   nonMasqueradeCIDR: 100.64.0.0/10
   sshAccess:
   - 0.0.0.0/0
-subnets:
+  subnets:
   - cidr: 10.35.20.0/24
     name: us-east-1a
     type: Private
@@ -79,7 +79,6 @@ subnets:
     nodes: private
 
 ---
-
 apiVersion: kops/v1alpha2
 kind: InstanceGroup
 metadata:
@@ -106,7 +105,7 @@ kind: InstanceGroup
 metadata:
   creationTimestamp: null
   labels:
- kops.k8s.io/cluster: dev.kiwi.k8s.local
+    kops.k8s.io/cluster: dev.kiwi.k8s.local
   name: master-us-east-1b
 spec:
   image: kope.io/k8s-1.8-debian-jessie-amd64-hvm-ebs-2018-01-14

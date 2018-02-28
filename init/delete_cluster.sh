@@ -8,7 +8,5 @@ fi
 export S3_BUCKET=${env}-kiwi-k8s-store
 export KOPS_STATE_STORE=s3://${S3_BUCKET}
 export CLUSTER_NAME=${env}.kiwi.k8s.local
-
-kops create -f resources/$CLUSTER_NAME.yaml
-kops create secret --name $CLUSTER_NAME sshpublickey admin -i ~/.ssh/id_rsa.pub
-kops update cluster $CLUSTER_NAME --yes
+kops delete cluster --name ${CLUSTER_NAME}
+kops delete cluster --name ${CLUSTER_NAME} --yes
