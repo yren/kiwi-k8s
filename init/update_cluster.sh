@@ -5,18 +5,17 @@ if [ -z $env ]; then
   exit 1;
 fi
 
-node_count=1
-master_count=1
+node_count=3
+master_count=3
 master_size=t2.medium
 node_size=t2.medium
 region="us-east-1"
 vpc_id=vpc-f4845c8f
 
-AWS_DEFAULT_REGION="us-east-1"
 export S3_BUCKET=${env}-kiwi-k8s-store
 export KOPS_STATE_STORE=s3://${S3_BUCKET}
-export AWS_AVAILABILITY_ZONES=${region}a,${region}b
-export AWS_AVAILABILITY_MASTER_ZONES=${region}a,${region}b
+export AWS_AVAILABILITY_ZONES=${region}a,${region}b,${region}c
+export AWS_AVAILABILITY_MASTER_ZONES=${region}a,${region}b,${region}c
 export CLUSTER_NAME=${env}.kiwi.k8s.local
 
 echo "create s3 bucket ${S3_BUCKET}"
