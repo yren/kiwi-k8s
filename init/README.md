@@ -15,4 +15,8 @@ on jumpbox
 cd kiwi-k8s/init
 ./install_cli.sh
 ```
-##
+## generate kops yaml
+```
+cd kiwi-k8s/init
+./export_cluster.sh
+```
