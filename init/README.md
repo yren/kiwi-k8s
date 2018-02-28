@@ -2,6 +2,8 @@
 
 ## update aws cli to latest
 ```
+export env=dev
+
 aws --version
 pip install awscli --upgrade --user
 aws --version
@@ -9,10 +11,8 @@ aws --version
 
 ## install kops and kubectl
 on jumpbox
-
 ```
 cd kiwi-k8s/init
 ./install_cli.sh
 ```
-
 ##
