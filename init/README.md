@@ -25,4 +25,14 @@ ssh-keygen -t rsa -C "ec2-user@kiwi"
 ```
 cd kiwi-k8s/init
 ./export_cluster.sh
+./update_cluster.sh
+```
+
+## delete k8s cluster
+* for save money, delete your k8s cluster from AWS (or you may receive a big bill)
+
+```
+cd kiwi-k8s/init
+export env=dev
+./delete_cluster.sh
 ```
