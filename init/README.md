@@ -26,6 +26,9 @@ ssh-keygen -t rsa -C "ec2-user@kiwi"
 cd kiwi-k8s/init
 ./export_cluster.sh
 ./update_cluster.sh
+
+# validate cluster
+kops validate cluster
 ```
 
 ## delete k8s cluster
