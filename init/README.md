@@ -31,6 +31,18 @@ cd kiwi-k8s/init
 kops validate cluster
 ```
 
+## install k8s dashboard
+```
+cd kiwi-k8s/init
+./install_dashboard.sh
+```
+
+## install helm
+```
+cd kiwi-k8s/init
+./install_helm.sh
+```
+
 ## delete k8s cluster
 * for save money, delete your k8s cluster from AWS (or you may receive a big bill)
 
