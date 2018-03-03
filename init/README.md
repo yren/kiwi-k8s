@@ -36,6 +36,10 @@ kops validate cluster
 cd kiwi-k8s/init
 ./install_dashboard.sh
 ```
+* dashboard url
+```
+/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/#!/overview?namespace=default
+```
 
 ## install helm
 ```

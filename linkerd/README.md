@@ -14,7 +14,7 @@ kubectl create namespace linkerd
 kubectl apply -f rbac.yml
 ```
 
-##
+## 3. namerd deploy
 ```
 kubectl apply -f namerd.yml
 ```
