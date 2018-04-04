@@ -123,27 +123,37 @@ Resources:
         Value: !Sub '${AWS::StackName}-ExternalApplication RouteTable'
       - Key: Environment
         Value: !Ref Env
+  RouteTableAssociationIntAppSubnetA:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref IntAppSubnetA
+      RouteTableId: !Ref IntAppRouteTable
+  RouteTableAssociationIntAppSubnetB:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref IntAppSubnetB
+      RouteTableId: !Ref IntAppRouteTable
+  RouteTableAssociationIntAppSubnetC:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref IntAppSubnetC
+      RouteTableId: !Ref IntAppRouteTable
+  RouteTableAssociationExtAppSubnetA:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref ExtAppSubnetA
+      RouteTableId: !Ref IntAppRouteTable
+  RouteTableAssociationExtAppSubnetB:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref ExtAppSubnetB
+      RouteTableId: !Ref IntAppRouteTable
+  RouteTableAssociationExtAppSubnetC:
+    Type: 'AWS::EC2::SubnetRouteTableAssociation'
+    Properties:
+      SubnetId: !Ref ExtAppSubnetC
+      RouteTableId: !Ref IntAppRouteTable
   
-  RouteTableAssociationAPrivate:
-    Type: 'AWS::EC2::SubnetRouteTableAssociation'
-    Properties:
-      SubnetId: !Ref SubnetAPrivate
-      RouteTableId: !Ref RouteTableAPrivate
-  RouteTableAssociationAPublic:
-    Type: 'AWS::EC2::SubnetRouteTableAssociation'
-    Properties:
-      SubnetId: !Ref SubnetAPublic
-      RouteTableId: !Ref RouteTableAPublic
-  RouteTableAssociationBPrivate:
-    Type: 'AWS::EC2::SubnetRouteTableAssociation'
-    Properties:
-      SubnetId: !Ref SubnetBPrivate
-      RouteTableId: !Ref RouteTableBPrivate
-  RouteTableAssociationBPublic:
-    Type: 'AWS::EC2::SubnetRouteTableAssociation'
-    Properties:
-      SubnetId: !Ref SubnetBPublic
-      RouteTableId: !Ref RouteTableBPublic
   PublicInternetRouteA:
     Type: 'AWS::EC2::Route'
     DependsOn: VPCGatewayAttachment
