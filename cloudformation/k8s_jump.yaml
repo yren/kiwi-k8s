@@ -1,0 +1,23 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Kubernetes VPC Bastion Host Setup
+Mappings:
+  BastionHostAMI:
+    us-east-1:
+      HVM64: ami-428aa838
+Parameters:
+  K8SVPCStackName:
+    Description: Kubernetes ENV-k8s-vpc StackName
+    Default: qa-k8s-vpc
+    Type: String
+    AllowedValues:
+      - dev-k8s-vpc
+      - qa-k8s-vpc
+      - ppe-k8s-vpc
+      - produs-k8s-vpc
+Resources:
+  BastionInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties:
+      Roles:
+        - Jump
+      InstanceProfileName: !Sub ${AWS::StackName}
