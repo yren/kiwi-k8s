@@ -123,37 +123,37 @@ Resources:
         Value: !Sub '${AWS::StackName}-ExternalApplication RouteTable'
       - Key: Environment
         Value: !Ref Env
-  RouteTableAssociationIntAppSubnetA:
+  IntAppSubnetARoute:
     Type: 'AWS::EC2::SubnetRouteTableAssociation'
     Properties:
       SubnetId: !Ref IntAppSubnetA
       RouteTableId: !Ref IntAppRouteTable
-  RouteTableAssociationIntAppSubnetB:
+  IntAppSubnetBRoute:
     Type: 'AWS::EC2::SubnetRouteTableAssociation'
     Properties:
       SubnetId: !Ref IntAppSubnetB
       RouteTableId: !Ref IntAppRouteTable
-  RouteTableAssociationIntAppSubnetC:
+  IntAppSubnetCRoute:
     Type: 'AWS::EC2::SubnetRouteTableAssociation'
     Properties:
       SubnetId: !Ref IntAppSubnetC
       RouteTableId: !Ref IntAppRouteTable
-  RouteTableAssociationExtAppSubnetA:
+  ExtAppSubnetARoute:
     Type: 'AWS::EC2::SubnetRouteTableAssociation'
     Properties:
       SubnetId: !Ref ExtAppSubnetA
       RouteTableId: !Ref ExtAppRouteTable
-  RouteTableAssociationExtAppSubnetB:
+  ExtAppSubnetBRoute:
     Type: 'AWS::EC2::SubnetRouteTableAssociation'
     Properties:
       SubnetId: !Ref ExtAppSubnetB
       RouteTableId: !Ref ExtAppRouteTable
-  RouteTableAssociationExtAppSubnetC:
+  ExtAppSubnetCRoute:
     Type: 'AWS::EC2::SubnetRouteTableAssociation'
     Properties:
       SubnetId: !Ref ExtAppSubnetC
       RouteTableId: !Ref ExtAppRouteTable
-  NetworkAclIntApp:
+  IntAppAcl:
     Type: AWS::EC2::NetworkAcl
     Properties:
       VpcId: !Ref VPC
@@ -162,22 +162,22 @@ Resources:
           Value: !Sub '${AWS::StackName}-InternalApplication ACL'
         - Key: Environment
           Value: Value: !Ref Env
-  AclAssociationIntAppSubnetA:
+  IntAppSubnetAAcl:
     Type: AWS::EC2::SubnetNetworkAclAssociation
     Properties:
-      NetworkAclId: !Ref NetworkAclIntApp
+      NetworkAclId: !Ref IntAppAcl
       SubnetId: !Ref IntAppSubnetA
-  AclAssociationIntAppSubnetB:
+  IntAppSubnetBAcl:
     Type: AWS::EC2::SubnetNetworkAclAssociation
     Properties:
-      NetworkAclId: !Ref NetworkAclIntApp
+      NetworkAclId: !Ref IntAppAcl
       SubnetId: !Ref IntAppSubnetB
-  AclAssociationIntAppSubnetC:
+  IntAppSubnetCAcl:
     Type: AWS::EC2::SubnetNetworkAclAssociation
     Properties:
-      NetworkAclId: !Ref NetworkAclIntApp
+      NetworkAclId: !Ref IntAppAcl
       SubnetId: !Ref IntAppSubnetC
-  NetworkAclExtApp:
+  ExtAppAcl:
     Type: AWS::EC2::NetworkAcl
     Properties:
       VpcId: !Ref VPC
@@ -186,20 +186,20 @@ Resources:
           Value: !Sub '${AWS::StackName}-ExternalApplication ACL'
         - Key: Environment
           Value: Value: !Ref Env
-  AclAssociationExtAppSubnetA:
+  ExtAppSubnetAAcl:
     Type: AWS::EC2::SubnetNetworkAclAssociation
     Properties:
-      NetworkAclId: !Ref NetworkAclExtApp
+      NetworkAclId: !Ref ExtAppAcl
       SubnetId: !Ref ExtAppSubnetA
-  AclAssociationExtAppSubnetB:
+  ExtAppSubnetBAcl:
     Type: AWS::EC2::SubnetNetworkAclAssociation
     Properties:
-      NetworkAclId: !Ref NetworkAclExtApp
+      NetworkAclId: !Ref ExtAppAcl
       SubnetId: !Ref ExtAppSubnetB
-  AclAssociationExtAppSubnetC:
+  ExtAppSubnetCAcl:
     Type: AWS::EC2::SubnetNetworkAclAssociation
     Properties:
-      NetworkAclId: !Ref NetworkAclExtApp
+      NetworkAclId: !Ref ExtAppAcl
       SubnetId: !Ref ExtAppSubnetC
   AclEntryIntAppOut100:
     Type: AWS::EC2::NetworkAclEntry
@@ -234,8 +234,8 @@ Resources:
       PortRange:
         From: 443
         To: 443
-  
-    
+
+
   PublicInternetRouteA:
     Type: 'AWS::EC2::Route'
     DependsOn: VPCGatewayAttachment
