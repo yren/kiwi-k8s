@@ -185,7 +185,7 @@ Resources:
         - Key: Name
           Value: !Sub '${AWS::StackName}-ExternalApplication ACL'
         - Key: Environment
-          Value: Value: !Ref Env
+          Value: !Ref Env
   ExtAppSubnetAAcl:
     Type: AWS::EC2::SubnetNetworkAclAssociation
     Properties:
