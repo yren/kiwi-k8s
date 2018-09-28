@@ -32,16 +32,16 @@ pip install awscli --upgrade --user
 
 export env=dev
 s3_bucket=${env}-kiwi-cf-scripts
-cf_stackname=${env}vpcdemo
+cf_stackname=${env}-vpc
 
 aws cloudformation deploy --stack-name ${cf_stackname} \
 --s3-bucket ${s3_bucket} --force-upload --template-file \
-./vpc_demo.yaml \
+./k8s_vpc.yaml \
 --parameter-overrides Env=${env} ClassB=10 \
 --no-execute-changeset
 * actual run
 aws cloudformation deploy --stack-name ${cf_stackname} \
 --s3-bucket ${s3_bucket} --force-upload --template-file \
-./vpc_demo.yaml \
---parameter-overrides Env=${env} ClassB=10 \
+./k8s_vpc.yaml \
+--parameter-overrides Env=${env} ClassB=10
 ```

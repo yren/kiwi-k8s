@@ -161,7 +161,7 @@ Resources:
         - Key: Name
           Value: !Sub '${AWS::StackName}-InternalApplication ACL'
         - Key: Environment
-          Value: Value: !Ref Env
+          Value: !Ref Env
   IntAppSubnetAAcl:
     Type: AWS::EC2::SubnetNetworkAclAssociation
     Properties:
