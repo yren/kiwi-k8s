@@ -234,6 +234,18 @@ Resources:
       PortRange:
         From: 443
         To: 443
+  IntAppAclOut115:
+    Type: AWS::EC2::NetworkAclEntry
+    Properties:
+      NetworkAclId: !Ref IntAppAcl
+      RuleNumber: 115
+      Protocol: 6  # TCP Protocol
+      RuleAction: allow
+      Egress: 'true'
+      CidrBlock: 0.0.0.0/0
+      PortRange:
+        From: 80
+        To: 80
   ExtAppAclIn100:
     Type: AWS::EC2::NetworkAclEntry
     Properties:
@@ -278,9 +290,7 @@ Resources:
       RuleAction: allow
       Egress: 'true'
       CidrBlock: !Sub '10.${ClassB}.0.0/16'
-      NetworkAclId: !Ref Ext
-      
-      AppAcl
+      NetworkAclId: !Ref ExtAppAcl
   ExtAppAclOut105:
     Type: AWS::EC2::NetworkAclEntry
     Properties:
